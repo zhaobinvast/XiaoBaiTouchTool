@@ -13,9 +13,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         enableLoginItemIfFirstLaunch()
+        setupAppIcon()
         setupStatusItem()
         setupGestureMonitor()
         checkAccessibilityPermission()
+    }
+
+    private func setupAppIcon() {
+        if let iconPath = Bundle.main.path(forResource: "icon", ofType: "png"),
+           let iconImage = NSImage(contentsOfFile: iconPath) {
+            NSApp.applicationIconImage = iconImage
+        }
     }
 
     private func setupStatusItem() {
@@ -25,7 +33,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             if let iconPath = Bundle.main.path(forResource: "icon", ofType: "png"),
                let iconImage = NSImage(contentsOfFile: iconPath) {
                 // Resize to fit menu bar (typically 18x18 or 22x22)
-                iconImage.size = NSSize(width: 25.2, height: 25.2)
+                iconImage.size = NSSize(width: 17.64, height: 17.64)
                 button.image = iconImage
             } else {
                 // Fallback to system symbol
